@@ -4,8 +4,9 @@ numpy
 openpyxl
 scipy
 scikit-learn
-plotly
+plotly==5.24.0
 matplotlib
 seaborn
 statsmodels
+
 snowflake
