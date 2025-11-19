@@ -132,18 +132,18 @@ def run_subapp(py_path: str, extra_ns: dict | None = None):
         st.error(f"Couldn't find `{py_path}` next to main.py.")
         return
 
-    # # Use cached namespace
-    # ns = get_fast_namespace().copy()
+    # Use cached namespace
+    ns = get_fast_namespace().copy()
 
-    # if extra_ns:
-    #     ns.update(extra_ns)
+    if extra_ns:
+        ns.update(extra_ns)
 
-    # with time_block(f"Render {os.path.basename(py_path)}"):
-    #     try:
-    #         exec(code, ns)
-    #     except Exception:
-    #         st.error("The selected dashboard crashed. See details:")
-    #         st.code("".join(traceback.format_exception(*sys.exc_info())), language="python")
+    with time_block(f"Render {os.path.basename(py_path)}"):
+        try:
+            exec(code, ns)
+        except Exception:
+            st.error("The selected dashboard crashed. See details:")
+            st.code("".join(traceback.format_exception(*sys.exc_info())), language="python")
 
 
 # ---------- Route ----------
@@ -153,4 +153,5 @@ elif choice.startswith("🧮"):
     run_subapp("Basel_RWA_Adv.py")
 else:
     run_subapp("Basel_Opti_Lab.py")
+
 
